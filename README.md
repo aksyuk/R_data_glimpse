@@ -17,5 +17,5 @@
 
 
 <p style="color:#7433FF"><b>ВНИМАНИЕ: чтобы сделать ссылки в pdf кликабельными, скачайте файл (кнопка "Download").</b></p>   
-![scr_pdf_click](Slides/images/scr_pdf_click.pdf)
+![scr_pdf_click](images/scr_pdf_click.pdf)
 
