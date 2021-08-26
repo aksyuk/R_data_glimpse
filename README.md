@@ -15,7 +15,7 @@
 
 1. [Лекция №1 (04.09.2021), pdf](https://github.com/aksyuk/R_data_glimpse/blob/main/Slides/slides_practice_01.pdf).   
 
-
-<p style="color:#7433FF"><b>ВНИМАНИЕ: чтобы сделать ссылки в pdf кликабельными, скачайте файл (кнопка "Download").</b></p>   
-![scr_pdf_click](images/scr_pdf_click.pdf)
+</br>
+<p style="color:#880015"><em>ВНИМАНИЕ: чтобы сделать ссылки в pdf кликабельными, скачайте файл (кнопка "Download").</em></p>   
+![scr_pdf_click](images/scr_pdf_click.png)
 
