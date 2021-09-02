@@ -27,18 +27,18 @@ background-size: cover
 
 ---
 
-## Занятие 1
+## Лекция 1
 
 - "Введение в язык статистической обработки данных `R`"  
 - три встречи, 5 пар   
 - сквозное задание + тест (на последней паре)   
 
 .pull-left[.center[
-<img src="./slides_practice_01_files/R.jpg" width="45%">
+<img src="./slides_lection_01_files/R.jpg" width="45%">
 ]]
 
 .pull-right[.center[
-<img src="./slides_practice_01_files/RStudio-Logo-Flat.png" width="100%">
+<img src="./slides_lection_01_files/RStudio-Logo-Flat.png" width="100%">
 ]]
 
 ---
@@ -65,7 +65,7 @@ background-size: cover
 
 ---
 
-<img src="./slides_practice_01_files/anaconda_servey-01.png" width="110%" align = "center">
+<img src="./slides_lection_01_files/anaconda_servey-01.png" width="110%" align = "center">
 
 <font size = "4px">
 Источник: <a href = "https://www.anaconda.com/state-of-data-science-2021/">Онлайн опрос на платформе Anaconda.com, апрель-май 2021 года</a>
@@ -73,7 +73,7 @@ background-size: cover
 
 ---
 
-<img src="./slides_practice_01_files/anaconda_servey-02_short.png" width="100%" align = "center">
+<img src="./slides_lection_01_files/anaconda_servey-02_short.png" width="100%" align = "center">
 
 <font size = "4px">
 Источник: <a href = "https://www.anaconda.com/state-of-data-science-2021/">Онлайн опрос на платформе Anaconda.com, апрель-май 2021 года</a>
@@ -83,7 +83,7 @@ background-size: cover
 
 В 2018 гг. `R` на втором месте по использованию в академических исследованиях (упоминания в Google Scholar) 
 
-<img src="./slides_practice_01_files/Fig_2a_ScholarlyImpact2018-1.png" width="120%" align = "center">
+<img src="./slides_lection_01_files/Fig_2a_ScholarlyImpact2018-1.png" width="120%" align = "center">
 
 <font size = "4px">
 Источник: <a href = "http://r4stats.com/articles/popularity/">The Popularity of Data Science Software, r4stats.com</a>
@@ -379,6 +379,6 @@ df.2019$city
 - Познакомимся с интерфейсом R Studio, научимся импортировать данные из .csv и с помощью API сайтов     
 
 .center[
-<img src="./slides_practice_01_files/Professortocat_v2.png" width="17%">
+<img src="./slides_lection_01_files/Professortocat_v2.png" width="17%">
 <font size = "3px">image credit: krman009@github.com</font>
 ]
