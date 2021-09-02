@@ -93,5 +93,6 @@ Lab_*.md
 # en: exceptions
 # ru: исключения
 #..........................................................................
-!Slides/slides_practice_*.pdf
+!Slides/slides_lection_*.pdf
+!Slides/slides_lab_*.pdf
 !Labs/manual_lab-*.pdf
