@@ -96,3 +96,4 @@ Lab_*.md
 !Slides/slides_lection_*.pdf
 !Slides/slides_lab_*.pdf
 !Labs/manual_lab-*.pdf
+*/prep_*.R
