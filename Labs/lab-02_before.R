@@ -60,7 +60,7 @@ if (!file.exists(log.filename)) file.create(log.filename)
 # читаем ранее загруженные данные
 # fileURL <- dest.file
 fileURL <- 'https://raw.githubusercontent.com/aksyuk/R_data_glimpse/main/Labs/data/comtrade_import-2019_raw.csv'
-DF.01 <- read.csv(fileURL, stringsAsFactors = F)
+DF.01 <- 
 
 dim(DF.01)
 str(DF.01)
@@ -70,15 +70,15 @@ colnames(DF.01)
 # Разбираемся с именами столбцов таблицы #######################################
 
 # копируем имена в символьный вектор, чтобы ничего не испортить
-nms <- colnames(DF.01)
+nms <- 
 # заменить серии из двух и более точек на одну
-nms <- gsub('[.]+', '.', nms)
+nms <- 
 # убрать все хвостовые точки
-nms <- gsub('[.]+$', '', nms)
+nms <- 
 # заменить US на USD
-nms <- gsub('Trade.Value.US', 'Trade.Value.USD', nms)
+nms <- 
 # проверяем, что всё получилось, и заменяем имена столбцов
-colnames(DF.01) <- nms
+colnames(DF.01) <- 
 # результат обработки имён столбцов
 colnames(DF.01)
 
@@ -86,25 +86,25 @@ colnames(DF.01)
 # Удаляем полностью пустые столбцы #############################################
 
 # делаем подсчёт пропусков по каждому столбцу
-na.num <- sapply(DF.01, function(x) sum(is.na(x)))
+na.num <- 
 na.num
 
 # в каких столбцах все наблюдения пропущены?
-col.remove <- na.num == nrow(DF.01)
+col.remove <- 
 
 # уберём эти столбцы из таблицы
-DF.01 <- DF.01[, !col.remove]
+DF.01 <- 
 dim(DF.01)
 
 
 # создаём data.table из фрейма #################################################
 
-DT.import <- data.table(DF.01)
+DT.import <- 
 # столбцы таблицы
 colnames(DT.import)
 # оставляем только нужные столбцы
-DT.import <- select(DT.import, Year, Period, Trade.Flow, Reporter, Partner, 
-                    Commodity.Code, Trade.Value.USD)
+DT.import <- 
+    
 
 # список стран из справочника БД Всемирного банка
 DT.country <- data.table(WDI_data$country)
@@ -112,15 +112,15 @@ DT.country <- select(DT.country, iso2c, country, region, income)
 
 # добавляем 'Reporter.' в названия столбцов с характеристиками стран,
 #  чтобы отличать продавцов от покупателя
-colnames(DT.country) <- paste0('Reporter.', colnames(DT.country))
+colnames(DT.country) <- 
 # добавляем столбец с группой стран-продавцов
-DT.import <- merge(DT.import, DT.country, 
-                   by.x = 'Reporter', by.y = 'Reporter.country')
+DT.import <- 
+    
 colnames(DT.import)
 dim(DT.import)
 
 # наконец, меняем формат периода времени с ГГГГММ на ГГГГ-ММ
-DT.import[, Period := as.character(Period)]
+DT.import[, ]
 DT.import[, Period := paste0(substr(Period, 1, 4), '-', substr(Period, 5, 7))]
 DT.import[, Period := factor(Period, 
                              levels = paste0('2019-', formatC(1:12, width = 2, 
@@ -132,28 +132,28 @@ DT.import[, Period := factor(Period,
 
 
 # описательные статистики по таблице данных
-summary(DT.import)
+
 
 # описательные статистики по количественному показателю
-summary(DT.import$Trade.Value.USD)
+
 
 # суммарная стоимость импорта в Уругвай в 2019 году по коду 86
-sum(DT.import$Trade.Value.USD)
+
 
 # к каким категориям относится Уругвай
-filter(DT.country, Reporter.country == 'Uruguay')
+
 
 
 # график динамики по месяцам 2019 в разрезе регионов мира (lattice) ############
 
 # так получается неверное отображение данных
-xyplot(Trade.Value.USD ~ Period | Reporter.region, data = DT.import,
-       type = 'o')
+
+
 
 # чтобы отразить динамику правильно, нужно агрегировать стоимость поставок
 #  по периоду и по региону мира
-group_by(DT.import, Period, Reporter.region) %>% 
-    summarise(Trade.Value.USD = sum(Trade.Value.USD)) -> dt.plot.01
+
+
 colnames(dt.plot.01)[colnames(dt.plot.01) == 'Reporter.region'] <- 
     'Регион.поставщика'
 # для отображения на графиках называем столбцы по-русски
@@ -162,26 +162,26 @@ colnames(dt.plot.01)[colnames(dt.plot.01) == 'Trade.Value.USD'] <-
     'Стоимость.поставок.долл'
 
 # теперь получается верный график динамики 
-xyplot(Стоимость.поставок.долл ~ Месяц | Регион.поставщика, data = dt.plot.01,
-       type = 'o')
+
+
 
 
 # круговая для отображения долей регионов за год (ggplot2) #####################
-group_by(DT.import, Reporter.region) %>% 
-    summarise(Trade.Value.USD = sum(Trade.Value.USD)) -> dt.plot.02
-dt.plot.02$Trade.Value.share <- paste0(round(dt.plot.02$Trade.Value.USD / 
-    sum(dt.plot.02$Trade.Value.USD) * 100, 1), '%')
+
+
+dt.plot.02$Trade.Value.share <- 
+    
 # для отображения на графиках называем столбцы по-русски
 colnames(dt.plot.02)[colnames(dt.plot.02) == 'Reporter.region'] <- 
     'Регион.поставщика'
 
 # исходные данные для графика и роли столбцов
-gp <- ggplot(data = dt.plot.02, aes(x = '', y = Trade.Value.USD,
-                                    fill = Регион.поставщика,
-                                    label = Trade.Value.share))
+gp <- ggplot(data = dt.plot.02, aes(x = , y = ,
+                                    fill = ,
+                                    label = ))
 # добавляем геометрию: столбчатая диаграмма 
 #  + полярные координаты, чтобы свернуть ряд данных в окружность
-gp <- gp + geom_bar(stat = 'identity', width = 1) + coord_polar('y', start = 0)
+gp <- gp + 
 # добавляем подписи секторов
 gp <- gp + geom_text(size = 3, position = position_stack(vjust = 0.5))
 # меняем палитру графика
@@ -191,7 +191,7 @@ gp <- gp + ggtitle('Импорт в Уругвай в 2019 по коду 86')
 # добавляем подпись под графиком
 gp <- gp + labs(caption = 'Уругвай относится к региону "Latin America & Caribbean"')
 # убираем разметку шкалы
-gp <- gp + theme_void()
+gp <- gp + 
 # отображаем график
 gp
 
@@ -202,19 +202,19 @@ gp
 #  только теперь сопоставим доли
 #  и пересчитаем стоимость в тысячи долларов
 dt.plot.01$Стоимость.поставок.долл <- 
-    round(dt.plot.01$Стоимость.поставок.долл / 1000, 1)
+    
 colnames(dt.plot.01)[colnames(dt.plot.01) == 'Стоимость.поставок.долл'] <- 
     'Стоимость.поставок.тыс.долл'
 
-gp <- ggplot(data = dt.plot.01, aes(x = Месяц, y = Стоимость.поставок.тыс.долл,
-                                    fill = Регион.поставщика,
-                                    label = Стоимость.поставок.тыс.долл))
+gp <- ggplot(data = dt.plot.01, aes(x = , y = ,
+                                    fill = ,
+                                    label = ))
 # добавляем геометрию: столбчатая диаграмма, столбики друг на друге
-gp <- gp + geom_bar(stat = 'identity')
+gp <- gp + 
 # добавляем подписи значений
 gp <- gp + geom_text(size = 3, position = position_stack(vjust = 0.5))
 # настройки горизонтальной оси
-gp <- gp + scale_x_discrete(drop = F)
+gp <- gp + 
 # меняем палитру графика
 gp <- gp + scale_fill_brewer(palette = 'Set2')
 # разворачиваем подписи по горизонтальной оси на 90 градусов
@@ -228,11 +228,11 @@ gp
 # находим топ-5 стран-поставщиков ##############################################
 
 # по всем странам
-group_by(DT.import, Reporter) %>% 
-    summarise(Trade.Value.USD = sum(Trade.Value.USD)) %>% 
-    arrange(-Trade.Value.USD) -> df.top
+
+
+
 # первые 5 строк отсортированной таблицы
-df.top[1:5, ]
+
 
 # по странам латиноамериканского региона
 group_by(filter(DT.import, Reporter.region == 'Latin America & Caribbean'), 
@@ -240,7 +240,7 @@ group_by(filter(DT.import, Reporter.region == 'Latin America & Caribbean'),
     summarise(Trade.Value.USD = sum(Trade.Value.USD)) %>% 
     arrange(-Trade.Value.USD) -> df.top.region
 # первые 5 строк отсортированной таблицы
-df.top.region[1:min(nrow(df.top.region), 5), ]
+
 
 # по странам с высоким доходом
 group_by(filter(DT.import, Reporter.income == 'High income'), 
@@ -248,7 +248,7 @@ group_by(filter(DT.import, Reporter.income == 'High income'),
     summarise(Trade.Value.USD = sum(Trade.Value.USD)) %>% 
     arrange(-Trade.Value.USD) -> df.top.income
 # первые 5 строк отсортированной таблицы
-df.top.income[1:min(nrow(df.top.income), 5), ]
+
 
 
 
@@ -286,16 +286,16 @@ head(DT.wdi.2019)
 
 # фильтруем страны по регионам из варианта
 unique(DT.country$Reporter.income)
-DT.wdi.2019 <- filter(DT.wdi.2019, 
-                      income %in% c('High income', 'Upper middle income'))
+DT.wdi.2019 <- 
+    
 
 # сколько пропусков в столбцах таблицы
 sapply(DT.wdi.2019, function(x){sum(is.na(x))})
 
 # код Намибии NA совпадает с меткой пропущенного наблюдения в R
-DT.wdi.2019[is.na(DT.wdi.2019$iso2c), ]
+
 # исправляем это
-DT.wdi.2019[is.na(DT.wdi.2019$iso2c), iso2c := 'NA']
+
 
 # убираем строки с пропусками
 dim(DT.wdi.2019)
@@ -310,39 +310,39 @@ dim(DT.wdi.2019)
 # описательные статистики ######################################################
 summary(DT.wdi.2019[, ..ind.names])
 # коэффициенты вариации
-CV <- round(sapply(DT.wdi.2019[, ..ind.names], sd) / 
-                sapply(DT.wdi.2019[, ..ind.names], mean) * 100, 1)
-df.CV <- data.frame(Показатель = ind.labels[ind.names], Коэфф.вариации.прц = CV)
+CV <- 
+    
+df.CV <- 
 df.CV
 
 
 # строим графики взаимного разброса (ggplot2) ##################################
 
-ggpairs(DT.wdi.2019[, ..ind.names], lower = list(continuous = 'smooth'))
+
 
 
 
 # Линейные регрессионные модели ================================================
 
 # модель со всеми объясняющими переменными
-fit.all <- lm(IC.BUS.EASE.XQ ~ ., data = DT.wdi.2019[, ..ind.names])
-summary(fit.all)
+fit.all <- 
+
 
 # корреляция между объясняющими IC.REG.COST.PC.ZS и IC.REG.DURS
-#  выше, чем корреляция IC.REG.DURS с зависимой переменной IC.BUS.EASE.XQ, 
-#  поэтому корректнее будет включить IC.REG.COST.PC.ZS и IC.REG.DURS 
-#  по отдельности в две разные модели
+#  сравнима с корреляцией между зависимой переменной IC.BUS.EASE.XQ и одной из 
+#  объясняющих (NY.GDP.PCAP.CD), поэтому корректнее будет включить
+#  IC.REG.COST.PC.ZS и IC.REG.DURS по отдельности в две разные модели
 # модель 1
-fit.1 <- lm(IC.BUS.EASE.XQ ~ . -IC.REG.COST.PC.ZS, 
+fit.1 <- lm( 
             data = DT.wdi.2019[, ..ind.names])
 summary(fit.1)
 
 # модель 2
-fit.2 <- lm(IC.BUS.EASE.XQ ~ . -IC.REG.DURS, 
+fit.2 <- lm( 
             data = DT.wdi.2019[, ..ind.names])
 summary(fit.2)
 
 # модель 2, параметры значимы на уровне 0.05
-fit.3 <- lm(IC.BUS.EASE.XQ ~ . -IC.REG.DURS -IC.TAX.TOTL.CP.ZS, 
+fit.3 <- lm( 
             data = DT.wdi.2019[, ..ind.names])
 summary(fit.3)
