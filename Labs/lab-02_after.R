@@ -39,14 +39,16 @@ dim(s1$data)
 is.data.frame(s1$data)
 
 fileName <- './data/comtrade_import-2019_raw.csv'
-write.csv2(s1$data, fileName, row.names = F)
+write.csv(s1$data, fileName, row.names = F)
 
 
 
 # Очистка данных ===============================================================
 
+# читаем ранее загруженные данные
+# fileURL <- './data/comtrade_import-2019_raw.csv'
 fileURL <- 'https://raw.githubusercontent.com/aksyuk/R_data_glimpse/main/Labs/data/comtrade_import-2019_raw.csv'
-DF.01 <- read.csv2(fileURL, stringsAsFactors = F)
+DF.01 <- read.csv(fileURL, stringsAsFactors = F)
 
 dim(DF.01)
 str(DF.01)
@@ -259,21 +261,14 @@ ind.labels <- c('ВВП на душу, текущие цены, USD',
                 'Рейтинг лёгкости ведения бизнеса')
 names(ind.labels) <- ind.names
 
-# скачиваем данные за 2019 год
-DT.wdi.2019 <- data.frame(WDI(country = 'all', indicator = ind.names,
-                              start = 2019, end = 2019))
-# записываем
-fileName <- './data/wdi-2019_raw.csv'
-write.csv2(DT.wdi.2019, fileName, row.names = F)
-
 
 
 # Очистка данных ===============================================================
 
-fileURL <- 'https://raw.githubusercontent.com/aksyuk/R_data_glimpse/main/Labs/data/comtrade_import-2019_raw.csv'
-DF.01 <- read.csv2(fileURL, stringsAsFactors = F)
-
-
+# читаем ранее скачанные данные за 2019 год
+# fileURL <- './data/wdi_2019.csv'
+fileURL <- 'https://raw.githubusercontent.com/aksyuk/R_data_glimpse/main/Labs/data/wdi_2019.csv'
+DT.wdi.2019 <- data.table(read.csv(fileURL, stringsAsFactors = F))
 
 # смотрим первые строки таблицы
 head(DT.wdi.2019)
